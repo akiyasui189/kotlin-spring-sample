@@ -1,0 +1,27 @@
+logging:
+  level:
+    web: "DEBUG"
+management:
+  endpoints:
+    web:
+      base-path: "/actuator"
+      exposure:
+        include:
+          - health
+          - info
+          - mappings
+  server:
+    port: 8081
+server:
+  port: 8080
+  servlet:
+    context-path: "/"
+spring:
+  application:
+    name: kotlin-spring-sample
+  profiles:
+    active: dev
+  devtools:
+    livereload:
+      enabled: false
+
