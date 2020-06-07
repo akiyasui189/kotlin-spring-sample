@@ -14,27 +14,27 @@ data class User (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
-        val userId: Long = 0,
+        var userId: Long = 0,
         @Column(name = "username")
-        val account: String,
+        var account: String,
         @Column(name = "password")
-        val password: String,
+        var password: String,
         @Column(name = "status")
-        val status: String,
+        var status: String,
         @Column(name = "email")
-        val email: String,
+        var email: String,
         @Column(name = "email_verified_at")
-        val emailVerifiedAt: LocalDateTime?,
+        var emailVerifiedAt: LocalDateTime?,
         @Column(name = "created_at")
-        val createdAt: LocalDateTime,
+        var createdAt: LocalDateTime,
         @Column(name = "created_by")
-        val createdBy: String,
+        var createdBy: String,
         @Column(name = "updated_at")
-        val updatedAt: LocalDateTime,
+        var updatedAt: LocalDateTime,
         @Column(name = "updated_by")
-        val updatedBy: String,
+        var updatedBy: String,
         @Column(name = "version")
-        val version: Int,
+        var version: Int,
         @Column(name = "deleted")
-        val deleted: Boolean
+        var deleted: Boolean
 )

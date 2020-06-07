@@ -5,11 +5,13 @@ import io.spring.start.kotlin.sample.entities.tables.User
 import io.spring.start.kotlin.sample.exceptions.AlreadyExistsException
 import io.spring.start.kotlin.sample.repositories.UserQueryRepository
 import io.spring.start.kotlin.sample.repositories.jpa.UserRepository
+import org.springframework.security.crypto.encrypt.TextEncryptor
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
+import kotlin.streams.toList
 
 @Service
-class UserService (val userRepository: UserRepository, val userQueryRepository: UserQueryRepository) {
+class UserService (val textEncryptor: TextEncryptor,val userRepository: UserRepository, val userQueryRepository: UserQueryRepository) {
 
     fun createUser(user: CreateUser): User {
         // check
@@ -22,7 +24,7 @@ class UserService (val userRepository: UserRepository, val userQueryRepository: 
                         user.account,
                         user.password,
                         "SIGN_UP",
-                        user.email,
+                        textEncryptor.encrypt(user.email),
                         null,
                         currentDateTime,
                         user.account,
@@ -35,6 +37,11 @@ class UserService (val userRepository: UserRepository, val userQueryRepository: 
 
     fun getUsersList(): List<User> {
         return userQueryRepository.findAll()
+                .map {
+                    it.email = textEncryptor.decrypt(it.email)
+                    it
+                }
+                .toList()
     }
 
 }
