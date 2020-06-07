@@ -32,16 +32,39 @@ dependencies {
 	///// spring
 	/// actuator
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	/// aop
+	implementation("org.springframework.boot:spring-boot-starter-aop")
+	/// data
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+	/// jdbc
+	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+	/// mybatis
+	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3")
+	/// security
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	/// web
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	/// validation
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	/// other
+	// flyway
+	implementation("org.flywaydb:flyway-core")
+	// jackson
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	/// for dev
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+	///// library
+	/// database
+	implementation("mysql:mysql-connector-java:8.0.20")
+	implementation("mysql:mysql-connector-java:8.0.20")
 	///// test
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("com.h2database:h2")
 }
 
 tasks.withType<Test> {

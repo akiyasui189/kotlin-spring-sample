@@ -1,6 +1,6 @@
 logging:
   level:
-    web: "DEBUG"
+    web: DEBUG
 management:
   endpoints:
     web:
@@ -11,17 +11,37 @@ management:
           - info
           - mappings
   server:
-    port: 8081
+    port: ${MONITOR_PORT:8081}
 server:
-  port: 8080
+  port: ${PORT:8080}
   servlet:
     context-path: "/"
 spring:
   application:
     name: kotlin-spring-sample
   profiles:
-    active: dev
+    active: ${PROFILE:dev}
+  ### DB
+  # database
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_MASTER_URL:jdbc:mysql://127.0.0.1:3306/sample}
+    username: ${DB_MASTER_USERNAME:user}
+    password: ${DB_MASTER_PASSWORD:pass}
+  # flyway
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    #baseline-version: 1.0.0
+    baseline-description: Initial
+    locations:
+      - classpath:/db/migration
+  # jpa
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: validate
+  # dev
   devtools:
     livereload:
       enabled: false
-
