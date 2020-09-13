@@ -14,17 +14,18 @@ import kotlin.streams.toList
 class UserService (val textEncryptor: TextEncryptor,val userRepository: UserRepository, val userQueryRepository: UserQueryRepository) {
 
     fun createUser(user: CreateUser): User {
+        val encryptedEmail = textEncryptor.encrypt(user.email)
         // check
-        if (userQueryRepository.findByUsernameOrEmail(user.account, user.email).isNotEmpty())
+        if (userQueryRepository.findByUsernameOrEmail(user.account, encryptedEmail).isNotEmpty())
             throw AlreadyExistsException("The User Already Exists!")
         // registration
         val currentDateTime: LocalDateTime = LocalDateTime.now()
         return userRepository.save(
-                User(0,
+                User(null,
                         user.account,
                         user.password,
                         "SIGN_UP",
-                        textEncryptor.encrypt(user.email),
+                        encryptedEmail,
                         null,
                         currentDateTime,
                         user.account,

@@ -61,6 +61,8 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.20")
 	implementation("mysql:mysql-connector-java:8.0.20")
 	///// test
+	/// mockK
+	testImplementation("com.ninja-squad:springmockk:2.0.3")
 	/// spock
 	testImplementation("org.codehaus.groovy:groovy-all:2.5.12")
 	testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
