@@ -14,7 +14,7 @@ data class User (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
-        var userId: Long = 0,
+        var userId: Long?,
         @Column(name = "username")
         var account: String,
         @Column(name = "password")
